@@ -40,36 +40,10 @@ public class DownloadImage extends HttpServlet {
 		fileFactory.setRepository(filesDir);
 		this.uploader = new ServletFileUpload(fileFactory);
 	}
-	/*protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		String fileName = request.getParameter("fileName");
-		if(fileName == null || fileName.equals("")){
-			throw new ServletException("File Name can't be null or empty");
-		}
-		File file = new File(request.getServletContext().getAttribute("FILES_DIR")+File.separator+fileName);
-		if(!file.exists()){
-			throw new ServletException("File doesn't exists on server.");
-		}
-		System.out.println("File location on server::"+file.getAbsolutePath());
-		ServletContext ctx = getServletContext();
-		InputStream fis = new FileInputStream(file);
-		String mimeType = ctx.getMimeType(file.getAbsolutePath());
-		response.setContentType(mimeType != null? mimeType:"application/octet-stream");
-		response.setContentLength((int) file.length());
-		response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
-		
-		ServletOutputStream os       = response.getOutputStream();
-		byte[] bufferData = new byte[1024];
-		int read=0;
-		while((read = fis.read(bufferData))!= -1){
-			os.write(bufferData, 0, read);
-		}
-		os.flush();
-		os.close();
-		fis.close();
-		System.out.println("File downloaded at client successfully");
-	}*/
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("do get method");
+		doPost(request, response);
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
