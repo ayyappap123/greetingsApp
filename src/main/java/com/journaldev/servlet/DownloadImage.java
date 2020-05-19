@@ -112,7 +112,7 @@ public class DownloadImage extends HttpServlet {
 
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         ge.registerFont(f);
-        Font font = new Font("calibri", Font.BOLD, 45);
+        Font font = new Font("calibri", Font.PLAIN, 45);
         
         g2.setFont(font); 
         g2.drawString(text, 75 , 750);
