@@ -107,7 +107,7 @@ public class DownloadImage extends HttpServlet {
         BufferedImage im = ImageIO.read(new File(imageFilePath));
         Graphics2D g2 = im.createGraphics();
         g2.setColor(new Color (46, 59, 111));
-        String url = getServletContext().getRealPath("font//calibri400.ttf");
+        String url = getServletContext().getRealPath("font//Calibri400.ttf");
         Font f = Font.createFont(Font.TRUETYPE_FONT, new File(url));
 
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
