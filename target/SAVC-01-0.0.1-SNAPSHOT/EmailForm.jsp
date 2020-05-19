@@ -55,7 +55,8 @@ function hideShow(){
 				<td><input type="text" name="recipient" size="50" required/></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><input type="submit" value="تحميل" /></td>
+				<!-- <td colspan="2" align="center"><input type="submit" value="تحميل" /></td> -->
+				<td colspan="2" align="center"><input type="submit" value="موافق"/></td>
 			</tr>
 			
 		</table>
