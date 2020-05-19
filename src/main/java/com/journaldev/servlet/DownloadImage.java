@@ -2,18 +2,17 @@ package com.journaldev.servlet;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.UUID;
 
@@ -103,12 +102,19 @@ public class DownloadImage extends HttpServlet {
 		System.out.println("File downloaded at client successfully");
 		
 	}
-	public static byte[] mergeImageAndText(String imageFilePath,
-            String text, Point textPosition) throws IOException {
+	public byte[] mergeImageAndText(String imageFilePath,
+            String text, Point textPosition) throws IOException, FontFormatException {
         BufferedImage im = ImageIO.read(new File(imageFilePath));
         Graphics2D g2 = im.createGraphics();
         g2.setColor(new Color (46, 59, 111));
-        g2.setFont(new Font("", Font.BOLD, 30)); 
+        String url = getServletContext().getRealPath("font//calibri400.ttf");
+        Font f = Font.createFont(Font.TRUETYPE_FONT, new File(url));
+
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        ge.registerFont(f);
+        Font font = new Font("calibri", Font.BOLD, 45);
+        
+        g2.setFont(font); 
         g2.drawString(text, 75 , 750);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(im, "jpeg", baos);
