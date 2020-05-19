@@ -108,7 +108,7 @@ public class DownloadImage extends HttpServlet {
         BufferedImage im = ImageIO.read(new File(imageFilePath));
         Graphics2D g2 = im.createGraphics();
         g2.setColor(new Color (46, 59, 111));
-        g2.setFont(new Font("Times New Roman", Font.PLAIN, 45)); 
+        g2.setFont(new Font("Times New Roman", Font.BOLD, 45)); 
         g2.drawString(text, 75 , 750);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(im, "jpeg", baos);
