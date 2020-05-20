@@ -105,8 +105,8 @@ public class DownloadImage extends HttpServlet {
 
 	public byte[] mergeImageAndText(String imageFilePath, String text, Point textPosition)
 			throws IOException, FontFormatException {
-		String url = getServletContext().getRealPath("font//Mirza-SemiBold.ttf");
-	    Font font = Font.createFont(Font.TRUETYPE_FONT, new File(url)).deriveFont(50f);       
+		String url = getServletContext().getRealPath("font//Scheherazade-Bold.ttf");
+	    Font font = Font.createFont(Font.TRUETYPE_FONT, new File(url)).deriveFont(55f);       
 	    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		 
         BufferedImage im = ImageIO.read(new File(imageFilePath));
