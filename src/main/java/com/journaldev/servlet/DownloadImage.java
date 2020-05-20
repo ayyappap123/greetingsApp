@@ -102,22 +102,21 @@ public class DownloadImage extends HttpServlet {
 		System.out.println("File downloaded at client successfully");
 		
 	}
-	public byte[] mergeImageAndText(String imageFilePath,
-            String text, Point textPosition) throws IOException, FontFormatException {
-        BufferedImage im = ImageIO.read(new File(imageFilePath));
-        Graphics2D g2 = im.createGraphics();
-        g2.setColor(new Color (46, 59, 111));
-        String url = getServletContext().getRealPath("font//Calibri400.ttf");
-        Font f = Font.createFont(Font.TRUETYPE_FONT, new File(url));
 
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        ge.registerFont(f);
-        Font font = new Font("calibri", Font.PLAIN, 45);
-        
-        g2.setFont(font); 
-        g2.drawString(text, 75 , 750);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageIO.write(im, "jpeg", baos);
-        return baos.toByteArray();
-    }
+	public byte[] mergeImageAndText(String imageFilePath, String text, Point textPosition)
+			throws IOException, FontFormatException {
+		String url = getServletContext().getRealPath("font//Calibri400.TTF");
+		Font font = Font.createFont(Font.TRUETYPE_FONT, new File(url)).deriveFont(45f);
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+
+		BufferedImage im = ImageIO.read(new File(imageFilePath));
+		Graphics2D g2 = ge.createGraphics(im);
+
+		g2.setColor(new Color(46, 59, 111));
+		g2.setFont(font);
+		g2.drawString(text, 75, 750);
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ImageIO.write(im, "jpeg", baos);
+		return baos.toByteArray();
+	}
 }
