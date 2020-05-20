@@ -40,7 +40,7 @@ function hideShow(){
 			<tr>
 				<td><bdi>الصفه</bdi></td>
 				<td>
-					<select id="dropdown" name="dropdown" required>
+					<select id="dropdown" name="dropdown" >
 					<option value="">select</option>
 					
 						<option value="اخوكم

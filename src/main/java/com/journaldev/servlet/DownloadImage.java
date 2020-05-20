@@ -13,7 +13,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
@@ -48,29 +47,22 @@ public class DownloadImage extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
-//		PrintWriter out = response.getWriter();
-//		out.write("<html><head></head><body>");
 		try {
 			String recipient = request.getParameter("recipient");
 			String dropDown = request.getParameter("dropdown");
-			
-//			String url = request.getServletContext().getAttribute("FILES_DIR")+"\\eid.jpg";
 			String url = getServletContext().getRealPath("img//eid.jpg");
 	        byte[] b = mergeImageAndText(url, dropDown +"/"+recipient, new Point(1000,1000));
+			if(dropDown == "" || dropDown == null){
+				b = mergeImageAndText(url, recipient, new Point(1000,1000));
+			}
 	        File file = new File(request.getServletContext().getAttribute("FILES_DIR")+File.separator+"SAVC_Greeting"+UUID.randomUUID()+".jpeg");
 	        FileOutputStream fos = new FileOutputStream(file);
-	       /* out.write("<div id=\"download\">File "+file.getName()+ " uploaded successfully.");*/
-//	        out.write("<br><br>");
-//			out.write("<a href=\"DownloadImage?fileName="+file.getName()+"\">تحميل </a>");
 	        fos.write(b);
 	        fos.close();
 	        downloadFile(request, response, file.getName());
-//	        request.getRequestDispatcher("EmailForm.jsp").include(request, response);
 			
 		} catch (Exception e) {
-//			out.write("Exception in uploading file.");
 		}
-//		out.write("</div></body></html>");
 	}
     private void downloadFile(HttpServletRequest request,HttpServletResponse response,String fileName) throws ServletException, IOException {
     	request.setCharacterEncoding("UTF-8");
@@ -102,12 +94,12 @@ public class DownloadImage extends HttpServlet {
 		System.out.println("File downloaded at client successfully");
 		
 	}
-
-	public byte[] mergeImageAndText(String imageFilePath, String text, Point textPosition)
-			throws IOException, FontFormatException {
-		String url = getServletContext().getRealPath("font//Scheherazade-Bold.ttf");
-	    Font font = Font.createFont(Font.TRUETYPE_FONT, new File(url)).deriveFont(55f);       
-	    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+	public byte[] mergeImageAndText(String imageFilePath,
+            String text, Point textPosition) throws IOException, FontFormatException {
+		
+	   String url = getServletContext().getRealPath("font//Scheherazade-Bold.ttf");
+	   Font font = Font.createFont(Font.TRUETYPE_FONT, new File(url)).deriveFont(55f);       
+	   GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		 
         BufferedImage im = ImageIO.read(new File(imageFilePath));
         Graphics2D g2 = ge.createGraphics(im);
@@ -118,5 +110,5 @@ public class DownloadImage extends HttpServlet {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(im, "jpeg", baos);
         return baos.toByteArray();
-	}
+    }
 }
