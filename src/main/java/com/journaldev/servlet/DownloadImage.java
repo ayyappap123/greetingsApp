@@ -105,7 +105,7 @@ public class DownloadImage extends HttpServlet {
 
 	public byte[] mergeImageAndText(String imageFilePath, String text, Point textPosition)
 			throws IOException, FontFormatException {
-		String url = getServletContext().getRealPath("font//Calibri400.TTF");
+		String url = getServletContext().getRealPath("font//Calibri400.ttf");
 		Font font = Font.createFont(Font.TRUETYPE_FONT, new File(url)).deriveFont(45f);
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
